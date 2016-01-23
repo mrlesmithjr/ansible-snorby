@@ -2,4 +2,4 @@
 - name: snorby | cloning snorby from GitHub
   git:
     repo: "https://github.com/Snorby/snorby"
-    dest: "{{ snorby_root_dir }}"
+    dest: "{{ snorby_root_dir }}/snorby"
