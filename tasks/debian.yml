@@ -1,0 +1,12 @@
+---
+- name: debian | installing pre-reqs
+  apt:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - imagemagick
+    - libyaml-dev
+    - libxml2-dev
+    - libxslt-dev
+    - git
+    - ruby1.9.3

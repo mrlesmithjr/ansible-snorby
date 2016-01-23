@@ -1,0 +1,8 @@
+---
+- name: Installs Snorby
+  hosts: all
+  become: true
+  vars:
+  roles:
+    - role: ansible-apache2
+    - role: ansible-snorby

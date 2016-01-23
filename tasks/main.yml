@@ -1,0 +1,6 @@
+---
+# tasks file for ansible-snorby
+- include: debian.yml
+  when: ansible_os_family == "Debian"
+
+- include: gems.yml
