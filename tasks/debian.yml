@@ -10,12 +10,20 @@
     name: "{{ item }}"
     state: present
   with_items:
-#    - bundler
+    - apache2-prefork-dev
+    - build-essential
+    - bundler
+    - git
     - imagemagick
+    - libmagickwand-dev
     - libmysqlclient-dev
-    - libyaml-dev
+    - libreadline-gplv2-dev
+    - libssl-dev
     - libxml2-dev
     - libxslt-dev
-    - git
-    - ruby1.9.3
+    - libyaml-dev
+    - ruby-text-format
     - ruby1.9.1-dev
+    - ruby1.9.3
+    - wkhtmltopdf
+    - zlib1g-dev

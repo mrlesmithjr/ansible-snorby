@@ -6,7 +6,7 @@
     user_install: no
     version: "{{ item.version|default(omit) }}"
   with_items:
-    - name: wkhtmltopdf
+#    - name: wkhtmltopdf
     - name: bundler
     - name: rails
     - name: rake
