@@ -1,4 +1,9 @@
 ---
+- name: debian | adding ruby ppa
+  apt_repository:
+    repo: "ppa:brightbox/ruby-ng"
+    state: present
+    
 - name: debian | installing pre-reqs
   apt:
     name: "{{ item }}"
@@ -10,4 +15,4 @@
     - libxml2-dev
     - libxslt-dev
     - git
-    - ruby1.9.3
+    - ruby2.2
