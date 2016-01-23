@@ -5,4 +5,5 @@
   vars:
   roles:
     - role: ansible-apache2
+    - role: ansible-snort
     - role: ansible-snorby
