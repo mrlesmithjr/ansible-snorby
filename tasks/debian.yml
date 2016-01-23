@@ -12,6 +12,7 @@
   with_items:
     - bundler
     - imagemagick
+    - libmysqlclient-dev
     - libyaml-dev
     - libxml2-dev
     - libxslt-dev

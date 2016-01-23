@@ -8,3 +8,4 @@
   bundler:
     state: present
     chdir: "{{ snorby_root_dir }}/snorby"
+    extra_args: "--path vendor/cache"
