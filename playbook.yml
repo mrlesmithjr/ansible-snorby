@@ -4,6 +4,7 @@
   become: true
   vars:
   roles:
+    - role: ansible-ntp
     - role: ansible-apache2
     - role: ansible-mysql
     - role: ansible-snort
