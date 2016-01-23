@@ -1,21 +1,21 @@
 ---
-- name: debian | adding ruby ppa
-  apt_repository:
-    repo: "ppa:brightbox/ruby-ng"
-    state: present
-    validate_certs: no
+#- name: debian | adding ruby ppa
+#  apt_repository:
+#    repo: "ppa:brightbox/ruby-ng"
+#    state: present
+#    validate_certs: no
 
 - name: debian | installing pre-reqs
   apt:
     name: "{{ item }}"
     state: present
   with_items:
-    - bundler
+#    - bundler
     - imagemagick
     - libmysqlclient-dev
     - libyaml-dev
     - libxml2-dev
     - libxslt-dev
     - git
-    - ruby2.2
-    - ruby2.2-dev
+    - ruby1.9.3
+    - ruby1.9.3-dev
