@@ -3,7 +3,7 @@
   gem:
     name: "{{ item.name }}"
     state: present
-#    user_install: no
+    user_install: no
     version: "{{ item.version|default(omit) }}"
   with_items:
     - name: wkhtmltopdf
