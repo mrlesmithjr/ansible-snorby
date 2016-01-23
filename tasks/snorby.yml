@@ -7,4 +7,4 @@
 - name: snorby | building snorby
   bundler:
     state: present
-    gemfile: "{{ snorby_root_dir }}/snorby/Gemfile"
+    chdir: "{{ snorby_root_dir }}/snorby"
