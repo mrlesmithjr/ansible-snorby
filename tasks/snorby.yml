@@ -9,3 +9,21 @@
     state: present
     chdir: "{{ snorby_root_dir }}/snorby"
     extra_args: "--path vendor/cache"
+
+- name: snorby | checking if snorby has already been setup
+  stat:
+    path: "{{ snorby_root_dir }}/snorby/.setup_complete"
+  register: snorby_setup_check
+
+- name: snorby | setting up snorby
+  command: "rake snorby:setup"
+  args:
+    chdir: "{{ snorby_root_dir }}/snorby/"
+  register: snorby_setup
+  when: not snorby_setup_check.stat.exists
+
+- name: snorby | marking snorby as setup
+  file:
+    path: "{{ snorby_root_dir }}/snorby/.setup_complete"
+    state: touch
+  when: snorby_setup.changed
