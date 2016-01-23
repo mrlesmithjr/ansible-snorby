@@ -18,4 +18,4 @@
     - libxslt-dev
     - git
     - ruby1.9.3
-    - ruby1.9.3-dev
+    - ruby1.9.1-dev
