@@ -4,7 +4,7 @@
     repo: "ppa:brightbox/ruby-ng"
     state: present
     validate_certs: no
-    
+
 - name: debian | installing pre-reqs
   apt:
     name: "{{ item }}"
@@ -17,3 +17,4 @@
     - libxslt-dev
     - git
     - ruby2.2
+    - ruby2.2-dev
