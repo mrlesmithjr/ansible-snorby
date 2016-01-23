@@ -3,3 +3,8 @@
   git:
     repo: "https://github.com/Snorby/snorby"
     dest: "{{ snorby_root_dir }}/snorby"
+
+- name: snorby | building snorby
+  bundler:
+    state: present
+    chdir: "{{ snorby_root_dir }}/snorby"
