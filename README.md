@@ -1,37 +1,107 @@
 Role Name
 =========
 
-A brief description of the role goes here.
+Installs and configures Snorby https://github.com/Snorby/snorby  
+Snorby is a web-frontend for Snort, Suricata and Sagan
 
 Requirements
 ------------
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+Install all Ansible role requirements.
+````
+sudo ansible-galaxy install -r requirements.yml -f
+````
+
+Vagrant
+-------
+Spin up Environment under Vagrant to test.
+````
+vagrant up
+````
 
 Usage
 -----
 
+###### Non-Vagrant
+http://iporhostname
+
+###### Vagrant
+http://127.0.0.1:8080
+
+###### Initial Login
 E-mail: snorby@example.com
 Password: snorby
 
 Role Variables
 --------------
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+````
+---
+# defaults file for ansible-snorby
+apache_root_dir: /var/www/html  #defines apache root directory
+mysql_root_password: root
+pri_domain_name: example.org  #defines your primary domain name
+snorby_authentication_mode: database
+snorby_db_info:  #defines Snorby DB Info
+  name: snorby  #DB Name
+  host: localhost  #DB Host
+  user: root  #DB User
+  pass: '{{ mysql_root_password }}'  #DB Pass
+snorby_mail_sender: 'snorby@{{ pri_domain_name }}'
+snorby_reconfigure_gemfile: true  #defines if Gemfile pulled down should be overwritten due to https://github.com/Snorby/snorby/pull/388
+snorby_root_dir: '{{ apache_root_dir }}/snorby'
+snorby_ssl: false
+snorby_webserver: apache2  #defines webserver type...apache2 or nginx
+snorby_webserver_name: 'snorby.{{ pri_domain_name }}'
+````
 
 Dependencies
 ------------
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+You can install dependencies as follows:
+````
+sudo ansible-galaxy install -r requirements.yml -f
+````
 
 Example Playbook
 ----------------
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
-
-    - hosts: servers
-      roles:
-         - { role: username.rolename, x: 42 }
+#### GitHub
+````
+- name: Installs Snorby
+  hosts: all
+  become: true
+  vars:
+    - passenger_webserver: apache2
+  roles:
+    - role: ansible-ntp
+    - role: ansible-apache2
+      when: passenger_webserver == "apache2"
+    - role: ansible-nginx
+      when: passenger_webserver == "nginx"
+    - role: ansible-passenger
+    - role: ansible-mysql
+    - role: ansible-snort
+    - role: ansible-snorby
+````
+#### Galaxy
+````
+- name: Installs Snorby
+  hosts: all
+  become: true
+  vars:
+    - passenger_webserver: apache2
+  roles:
+    - role: mrlesmithjr.ntp
+    - role: mrlesmithjr.apache2
+      when: passenger_webserver == "apache2"
+    - role: mrlesmithjr.nginx
+      when: passenger_webserver == "nginx"
+    - role: mrlesmithjr.passenger
+    - role: mrlesmithjr.mysql
+    - role: mrlesmithjr.snort
+    - role: mrlesmithjr.snorby
+````
 
 License
 -------
@@ -41,4 +111,7 @@ BSD
 Author Information
 ------------------
 
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+Larry Smith Jr.
+- @mrlesmithjr
+- http://everythingshouldbevirtual.com
+- mrlesmithjr [at] gmail.com
