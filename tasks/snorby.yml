@@ -2,28 +2,62 @@
 - name: snorby | cloning snorby from GitHub
   git:
     repo: "https://github.com/Snorby/snorby"
-    dest: "{{ snorby_root_dir }}/snorby"
+    dest: "{{ snorby_root_dir }}"
 
-#- name: snorby | building snorby
-#  bundler:
-#    state: present
-#    chdir: "{{ snorby_root_dir }}/snorby"
+- name: snorby | configuring Gemfile
+  template:
+    src: "var/www/html/snorby/Gemfile.j2"
+    dest: "{{ snorby_root_dir }}"
+    owner: root
+    group: root
+    mode: 0644
+  when: snorby_reconfigure_gemfile is defined and snorby_reconfigure_gemfile
+
+- name: snorby | building snorby
+  bundler:
+    state: present
+    chdir: "{{ snorby_root_dir }}"
 ##    extra_args: "--path vendor/cache"
 
-#- name: snorby | checking if snorby has already been setup
-#  stat:
-#    path: "{{ snorby_root_dir }}/snorby/.setup_complete"
-#  register: snorby_setup_check
+- name: snorby | checking if snorby has already been setup
+  stat:
+    path: "{{ snorby_root_dir }}/snorby/.setup_complete"
+  register: snorby_setup_check
 
-#- name: snorby | setting up snorby
-#  command: "rake snorby:setup"
-#  args:
-#    chdir: "{{ snorby_root_dir }}/snorby/"
-#  register: snorby_setup
-#  when: not snorby_setup_check.stat.exists
+- name: snorby | capturing wkhtmltopdf path
+  command: "which wkhtmltopdf"
+  register: wkhtmltopdf_path
 
-#- name: snorby | marking snorby as setup
-#  file:
-#    path: "{{ snorby_root_dir }}/snorby/.setup_complete"
-#    state: touch
-#  when: snorby_setup.changed
+- name: snorby | configuring snorby
+  template:
+    src: "var/www/html/snorby/config/snorby_config.yml.j2"
+    dest: "{{ snorby_root_dir }}/config/snorby_config.yml"
+    owner: root
+    group: root
+    mode: 0644
+
+- name: snorby | configuring snorby db
+  template:
+    src: "var/www/html/snorby/config/database.yml.j2"
+    dest: "{{ snorby_root_dir }}/config/database.yml"
+    owner: root
+    group: root
+    mode: 0644
+
+- name: snorby | creating snorby db
+  mysql_db:
+    name: "{{ snorby_db_info.name }}"
+    state: present
+
+- name: snorby | setting up snorby
+  command: "rake snorby:setup {{ snorby_environment }}"
+  args:
+    chdir: "{{ snorby_root_dir }}/snorby/"
+  register: snorby_setup
+  when: not snorby_setup_check.stat.exists
+
+- name: snorby | marking snorby as setup
+  file:
+    path: "{{ snorby_root_dir }}/snorby/.setup_complete"
+    state: touch
+  when: snorby_setup.changed
