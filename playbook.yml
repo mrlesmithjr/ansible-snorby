@@ -4,6 +4,7 @@
   become: true
   vars:
     - passenger_webserver: apache2
+    - snort_barnyard2_enable: true
   roles:
     - role: ansible-ntp
     - role: ansible-apache2
