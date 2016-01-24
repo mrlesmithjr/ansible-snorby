@@ -50,7 +50,7 @@
 #    state: present
 
 - name: snorby | setting up snorby
-  command: "rake snorby:setup {{ snorby_environment }}"
+  command: "rake snorby:setup"
   args:
     chdir: "{{ snorby_root_dir }}"
   register: snorby_setup
