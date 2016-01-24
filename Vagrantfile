@@ -12,6 +12,7 @@ Vagrant.configure(2) do |config|
 
     snorby.vm.network :private_network, ip: "192.168.202.201"
     snorby.vm.network "forwarded_port", guest: 80, host: 8080
+    snorby.vm.network "forwarded_port", guest: 3000, host: 3000
 
     snorby.vm.provider "virtualbox" do |vb|
       vb.memory = "2048"
