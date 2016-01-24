@@ -67,7 +67,6 @@
   template:
     src: "etc/apache2/sites-available/snorby.conf.j2"
     dest: "etc/apache2/sites-available/snorby.conf"
-    state: present
   register: snorby_apache2_site_created
   notify: restart apache2
   when: snorby_webserver == "apache2"
