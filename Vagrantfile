@@ -14,7 +14,8 @@ Vagrant.configure(2) do |config|
     snorby.vm.network "forwarded_port", guest: 80, host: 8080
 
     snorby.vm.provider "virtualbox" do |vb|
-      vb.memory = "1024"
+      vb.memory = "2048"
+      vb.cpus = "2"
     end
   end
   config.vm.provision :shell, path: "provision.sh", keep_color: "true"
