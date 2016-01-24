@@ -7,7 +7,7 @@
 - name: snorby | configuring Gemfile
   template:
     src: "var/www/html/snorby/Gemfile.j2"
-    dest: "{{ snorby_root_dir }}"
+    dest: "{{ snorby_root_dir }}/Gemfile"
     owner: root
     group: root
     mode: 0644
