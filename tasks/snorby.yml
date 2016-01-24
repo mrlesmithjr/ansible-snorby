@@ -62,3 +62,32 @@
     path: "{{ snorby_root_dir }}/.setup_complete"
     state: touch
   when: snorby_setup.changed
+
+- name: snorby | configuring snorby Apache2 site
+  template:
+    src: "etc/apache2/sites-available/snorby.conf.j2"
+    dest: "etc/apache2/sites-available/snorby.conf"
+    state: present
+  register: snorby_apache2_site_created
+  notify: restart apache2
+  when: snorby_webserver == "apache2"
+
+- name: snorby | checking if default Apache2 default site exists
+  stat:
+    path: "/etc/apache2/sites-enabled/000-default"
+  register: apache2_default_site
+  when: snorby_webserver == "apache2"
+
+- name: snorby | removing Apache2 default site
+  command: "a2dissite 000-default"
+  notify: restart apache2
+  when: >
+        apache2_default_site.stat.exists and
+        snorby_webserver == "apache2"
+
+- name: snorby | enabling snorby Apache2 site
+  command: "a2ensite snorby.conf"
+  notify: restart apache2
+  when: >
+        snorby_apache2_site_created.changed and
+        snorby_webserver == "apache2"
