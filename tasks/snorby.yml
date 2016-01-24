@@ -90,3 +90,25 @@
   when: >
         snorby_apache2_site_created.changed and
         snorby_webserver == "apache2"
+
+- name: snorby | ensuring snorby production log exists
+  stat:
+    path: "{{ snorby_root_dir }}/logs/production.log"
+  register: snorby_production_log
+
+- name: snorby | creating snorby production log (If not exists)
+  file:
+    path: "{{ snorby_root_dir }}/logs/production.log"
+    state: touch
+    owner: www-data
+    group: www-data
+    mode: 0666
+  when: not snorby_production_log.stat.exists
+
+- name: snorby | ensuring all snorby folder ownership is correct
+  file:
+    path: "{{ snorby_root_dir }}"
+    owner: www-data
+    group: www-data
+    recurse: yes
+    state: directory
