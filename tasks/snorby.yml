@@ -3,6 +3,7 @@
   git:
     repo: "https://github.com/Snorby/snorby"
     dest: "{{ snorby_root_dir }}"
+    update: no
 
 - name: snorby | configuring Gemfile
   template:
