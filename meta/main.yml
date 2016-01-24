@@ -1,7 +1,6 @@
 galaxy_info:
   author: Larry Smith Jr.
-  description: Installs and configures Snorby https://github.com/Snorby/snorby
-  Snorby is a web-frontend for Snort, Suricata and Sagan
+  description: Installs and configures Snorby https://github.com/Snorby/snorby  Snorby is a web-frontend for Snort, Suricata and Sagan
   #company: your company (optional)
 
   # If the issue tracker for your role is not on github, uncomment the
