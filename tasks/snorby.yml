@@ -93,12 +93,12 @@
 
 - name: snorby | ensuring snorby production log exists
   stat:
-    path: "{{ snorby_root_dir }}/logs/production.log"
+    path: "{{ snorby_root_dir }}/log/production.log"
   register: snorby_production_log
 
 - name: snorby | creating snorby production log (If not exists)
   file:
-    path: "{{ snorby_root_dir }}/logs/production.log"
+    path: "{{ snorby_root_dir }}/log/production.log"
     state: touch
     owner: www-data
     group: www-data
