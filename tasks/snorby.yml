@@ -44,10 +44,10 @@
     group: root
     mode: 0644
 
-- name: snorby | creating snorby db
-  mysql_db:
-    name: "{{ snorby_db_info.name }}"
-    state: present
+#- name: snorby | creating snorby db
+#  mysql_db:
+#    name: "{{ snorby_db_info.name }}"
+#    state: present
 
 - name: snorby | setting up snorby
   command: "rake snorby:setup {{ snorby_environment }}"
