@@ -12,7 +12,7 @@
   with_items:
     - apache2-prefork-dev
     - build-essential
-    - bundler
+#    - bundler
     - git
     - imagemagick
     - libmagickwand-dev
@@ -25,5 +25,5 @@
     - ruby-text-format
     - ruby1.9.1-dev
     - ruby1.9.3
-    - wkhtmltopdf
+#    - wkhtmltopdf
     - zlib1g-dev
