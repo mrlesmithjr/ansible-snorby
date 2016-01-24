@@ -11,7 +11,7 @@ production:
   # baseuri: '/snorby'
   domain: '{{ pri_domain_name }}'
   wkhtmltopdf: {{ wkhtmltopdf_path.stdout }}
-  ssl: "{{ snorby_ssl|lower }}"
+  ssl: {{ snorby_ssl|lower }}
   mailer_sender: '{{ snorby_mail_sender }}'
   geoip_uri: "http://geolite.maxmind.com/download/geoip/database/GeoLiteCountry/GeoIP.dat.gz"
   rules:
@@ -31,7 +31,7 @@ development:
   baseuri: ''
   domain: localhost:3000
   wkhtmltopdf: {{ wkhtmltopdf_path.stdout }}
-  ssl: "{{ snorby_ssl|lower }}"
+  ssl: {{ snorby_ssl|lower }}
   mailer_sender: '{{ snorby_mail_sender }}'
   geoip_uri: "http://geolite.maxmind.com/download/geoip/database/GeoLiteCountry/GeoIP.dat.gz"
   rules:
