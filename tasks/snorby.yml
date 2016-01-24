@@ -73,12 +73,12 @@
 
 - name: snorby | checking if default Apache2 default site exists
   stat:
-    path: "/etc/apache2/sites-enabled/000-default"
+    path: "/etc/apache2/sites-enabled/000-default.conf"
   register: apache2_default_site
   when: snorby_webserver == "apache2"
 
 - name: snorby | removing Apache2 default site
-  command: "a2dissite 000-default"
+  command: "a2dissite 000-default.conf"
   notify: restart apache2
   when: >
         apache2_default_site.stat.exists and
