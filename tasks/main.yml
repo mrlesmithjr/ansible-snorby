@@ -6,3 +6,5 @@
 - include: gems.yml
 
 - include: snorby.yml
+
+- include: barnyard2.yml

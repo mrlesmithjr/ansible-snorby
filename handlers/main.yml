@@ -4,3 +4,8 @@
   service:
     name: apache2
     state: restarted
+
+- name: restart barnyard2
+  service:
+    name: barnyard2
+    state: restarted
