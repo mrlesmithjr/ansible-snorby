@@ -1,7 +1,9 @@
 > [!CAUTION]
 > **This project is archived and no longer maintained.**
 > Archived: 2026-03-26
-> Reason: Low community usage; Snorby project itself is no longer maintainedRole Name
+> Reason: Low community usage; Snorby project itself is no longer maintained
+
+Role Name
 =========
 
 Installs and configures Snorby https://github.com/Snorby/snorby  
